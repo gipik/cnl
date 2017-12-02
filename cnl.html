@@ -1,6 +1,5 @@
 <html>
-<title>Stipendio Netto</title>
-
+<title>Grafico Stipendio Netto</title>
 <body text='#1A4876'>
 <meta name="keywords" content="CCNL, Lordo, Netto, RAL, R.A.L., calcolo, grafico">
 <meta name="author" content="Giacomo Picconi <giacomo.picconi@gmail.com">
@@ -9,17 +8,13 @@
 <style>
 .lfc {font-size:small;}
 </style>
-
-
-
 <script>
-
-
 var colors_background='#FCE883';
 var colors_line='#E6A8D7';
 var colors_text='#1A4876';
-function calcolostipendionetto()
-{
+
+// Algoritmo per il calcolo del netto da https://contrattocommercio.blogspot.it/2010/09/lordo-netto-stipendio-nel-contratto-del.html
+function calcolostipendionetto() {  
 
 	var redditoComplessivo=document.getElementById("redditoComplessivo").value;
 	redditoComplessivo=redditoComplessivo.toString().replace(',','.');
@@ -348,8 +343,6 @@ function calcolostipendionetto()
 											//document.getElementById("ej1").value=Math.round(redditoImponibile*100)/100;
 											//document.getElementById("ej2").value=Math.round(IRPEFlorda*100)/100;
 											//document.getElementById("ej3").value=Math.round(deduccion*100)/100;
-											
-											
 										}
 									}
 								}
@@ -363,18 +356,12 @@ function calcolostipendionetto()
 </script>
 
 <font face=arial>
-
-<center><b>Stipendio netto in funzione del reddito annuo lordo (R.A.L.)</b></center><br>
+<center><b>Grafico stipendio netto in funzione del reddito annuo lordo (R.A.L.)</b></center><br>
 <center>
-
-
 <table width=100%>
 <tr align=center>
 <td>
-
-
 <label class="lfc" for="regione">Regione: </label>
-       
        &nbsp;
        <select class="selectInput" id="regione" name="regione" style="width: 148px;font-size: small;" tabindex="2" onchange="gra()">
          <option value="abruzzo">Abruzzo</option>
@@ -401,15 +388,10 @@ function calcolostipendionetto()
         </select>
 </td>
 <td>
-       
 	<label class="lfc" for="mensilita">Mensilità: <sup><a href="#notes">[3]</a></sup></label>
-		  <input alt="" id="mensilita" maxlength="2" name="mensilita" size="9" style="text-align: right; width: 40px; font-size:small;" tabindex="10" type="text" value="14" onchange="gra()" />
+        <input alt="" id="mensilita" maxlength="2" name="mensilita" size="9" style="text-align: right; width: 40px; font-size:small;" tabindex="10" type="text" value="14" onchange="gra()" />
 </td>
 <td>
-       
-       
-        
-        
 	<label class="lfc" for="figliInferiore">Figli a carico < 3 anni</label>
         <input alt="" id="figliInferiore" maxlength="2" name="figliInferiore" size="9" style="text-align: right; width: 40px; font-size:small;" tabindex="4" type="text" value="0" onchange="gra()" />
 </td>
@@ -439,115 +421,88 @@ function calcolostipendionetto()
 </td>
 <td>
         <label class="lfc" for="carico">Coniuge a carico</label>
-       <select class="selectInput" id="carico" name="carico" tabindex="3" style="font-size:small;" onchange="gra()">
+        <select class="selectInput" id="carico" name="carico" tabindex="3" style="font-size:small;" onchange="gra()">
          <option value="no">No</option>
          <option value="si">Si</option>
         </select>
 </td>
 <td>
 	<label class="lfc" for="giorni">Giorni di lavoro: <sup><a href="#notes">[4]</a></sup></label>
-		  <input alt="" id="giorni" maxlength="3" name="giorni" size="9" style="text-align: right; width: 40px;font-size:small;" tabindex="11" type="text" value="365" onchange="gra()" />
+        <input alt="" id="giorni" maxlength="3" name="giorni" size="9" style="text-align: right; width: 40px;font-size:small;" tabindex="11" type="text" value="365" onchange="gra()" />
 </td>
 </tr>
 </table>
-        
-        
 
 <br />
 
 <div id=gdiv></div>
 <br>
+
 <button onclick="gra()">Aggiorna Grafico Netto Mensile</button> <button onclick="gra_imposta()">Aggiorna Grafico Imposta Netta</button> <button onclick="gra_anno()">Aggiorna Grafico Netto Annuale</button>
 </center>
 
-
-
 <div id="panel-calculo">
-<form action="#" class="formulario" id="formulario1" name="formulario1">
-<fieldset class="form_labels" style="border: #FFF;">
-<div class="error" id="errorStipendioNetto">
-</div>
-<br />
-<!--
-<div class="form_labelbox">
-<label class="lfc" for="tempoDerminato">Hai un contratto a tempo determinato?</label>
-       &nbsp;
-       <select class="selectInput" id="tempoDerminato" name="tempoDerminato" tabindex="12">
-         <option value="no">No</option>
-         <option value="si">Si</option>
-        </select></div>
--->
-<br />
-<br />
-<hr />
-<br />
-<div class="form_labelbox">
-<label class="lfc" for="redditoComplessivo">Stipendio annuo lordo (RAL)? <sup><a href="#notes">[1]</a></sup></label>
-            &nbsp;
-          <input alt="" id="redditoComplessivo" maxlength="9" name="redditoComplessivo" size="9" style="text-align: right; width: 140px;" tabindex="1" type="text" value="" />&nbsp; <label class="lfc" for="redditoComplessivo">Euro</label>
+  <form action="#" class="formulario" id="formulario1" name="formulario1">
+    <fieldset class="form_labels" style="border: #FFF;">
+      <div class="error" id="errorStipendioNetto">
+      </div>
+      <br />
+      <hr />
+      <br />
+      <div class="form_labelbox">
+	<label class="lfc" for="redditoComplessivo">Stipendio annuo lordo (RAL)<sup><a href="#notes">[1]</a></sup></label>
+	&nbsp;
+	<input alt="" id="redditoComplessivo" maxlength="9" name="redditoComplessivo" size="9" style="text-align: right; width: 140px;" tabindex="1" type="text" value="" />&nbsp; <label class="lfc" for="redditoComplessivo">Euro</label>
       </div>
 
-
-<div class="form_buttonbox">
-
-<input onclick="calcolostipendionetto();return true" type="button" value="Calcola il tuo stipendio netto" />
-        
-</div>
-<br /></fieldset>
-</form>
+      <div class="form_buttonbox">
+	<input onclick="calcolostipendionetto();return true" type="button" value="Calcola il tuo stipendio netto" />
+      </div>
+      <br />
+    </fieldset>
+  </form>
 </div>
 
 <div id="panel-resultado">
-<form action="#" class="formulario" id="formulario2" method="post" name="formulario2">
-<fieldset class="form_labels" style="padding: 5px 10px 10px 15pt;">
-<div id="resultadoPrimero">
-<br />
-<div class="form_labelbox">
-<label class="labelformresultado">Stipendio netto anuale:</label>
-          <input alt="" class="textInput" id="stipendioAnuale" maxlength="9" name="stipendioAnuale" size="9" style="width: 100px;" tabindex="13" type="text" value="" />&nbsp; 
+  <form action="#" class="formulario" id="formulario2" method="post" name="formulario2">
+  <fieldset class="form_labels" style="padding: 5px 10px 10px 15pt;">
+    <div id="resultadoPrimero">
+      <br />
+      <div class="form_labelbox">
+	<label class="labelformresultado">Stipendio netto anuale:</label>
+	<input alt="" class="textInput" id="stipendioAnuale" maxlength="9" name="stipendioAnuale" size="9" style="width: 100px;" tabindex="13" type="text" value="" />&nbsp; 
       </div>
-<br /></div>
-<div id="resultadoUltimo">
-<div class="form_labelbox">
-<label class="labelformresultado"></label><label class="labelformresultado" style="font-weight: bold;"> Stipendio netto mensile: <sup><a href="#notes">[5]</a></sup></label>
-          <input alt="" class="textInput" id="stipendioMensile" maxlength="9" name="stipendioMensile" size="9" style="font-weight: bold; width: 100px;" tabindex="14" type="text" value="" />&nbsp; <br />
-<div id="mensilita" style="float: right; padding-right: 180px; text-align: left; text-decoration: underline;">
+      <br />
+    </div>
+    <div id="resultadoUltimo">
+      <div class="form_labelbox">
+	<label class="labelformresultado"></label><label class="labelformresultado" style="font-weight: bold;"> Stipendio netto mensile: <sup><a href="#notes">[5]</a></sup></label>
+	<input alt="" class="textInput" id="stipendioMensile" maxlength="9" name="stipendioMensile" size="9" style="font-weight: bold; width: 100px;" tabindex="14" type="text" value="" />&nbsp; <br />
+	<div id="mensilita" style="float: right; padding-right: 180px; text-align: left; text-decoration: underline;">
+	</div>
+      </div>
+      <br />
+    </div>
+    <div class="form_labelbox">
+      <label class="labelformresultado">Imposta netta:</label>
+      <input alt="" class="textInput" id="impostaNetta" maxlength="9" name="impostaNetta" size="9" style="width: 100px;" tabindex="15" type="text" value="" />&nbsp; 
+    </div>
+    <br />
+  </fieldset>
+  </form>
 </div>
-</div>
-<br /></div>
-<div class="form_labelbox">
-<label class="labelformresultado">Imposta netta:</label>
-          <input alt="" class="textInput" id="impostaNetta" maxlength="9" name="impostaNetta" size="9" style="width: 100px;" tabindex="15" type="text" value="" />&nbsp; 
-     </div>
-<br /></fieldset>
-</form>
-</div>
-
 
 <script>
-
-/*
-function gra() {
-  var cnt=0;
-  for(upi=1000; upi<=300000; upi+=1000) {
-    //console.log('RAL:'+upi);
-    document.getElementById("redditoComplessivo").value=upi;
-    calcolostipendionetto();
-    //console.log('RAL:'+upi+':'+document.getElementById("stipendioAnuale").value);
-    cnt++;
-  }
-  console.log('CNT['+cnt+']');
-}
-*/
-
 function abs_lineto(x,y) {
-	ctx.moveTo(ORIGIN_X,ORIGIN_Y);           // Create a starting point
+	ctx.moveTo(ORIGIN_X,ORIGIN_Y);
 	ctx.lineTo(ORIGIN_X+x,ORIGIN_Y+y);
 }
+
 function putPixel(x,y,PEN_SIZE) {
 	ctx.fillStyle = "rgba(0,0,0,0,1)";
 	ctx.fillRect( x, y, PEN_SIZE, PEN_SIZE );
 }
+
 function abs_putpixel(x,y,PEN_SIZE) {
 	putPixel(ORIGIN_X + x,ORIGIN_Y + y,PEN_SIZE);
 }
@@ -555,7 +510,6 @@ function abs_putpixel(x,y,PEN_SIZE) {
 const numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' €';
 }
-
 var CANVAS_WIDTH=1300;
 var CANVAS_HEIGHT=400;
 var PAD_MARGIN=120
@@ -595,7 +549,6 @@ function gra_anno() {
     abs_lineto(NEGATIVE_AXES_LEN * -1,0);          // negatives x
     abs_lineto(0,WIDTH_PY*-1);           // Create a starting point
     abs_lineto(0,NEGATIVE_AXES_LEN);          // negatives y
-    
     ctx.stroke();
     
     ctx.beginPath();
@@ -609,7 +562,6 @@ function gra_anno() {
 	      ctx.fillText( numberWithCommas(p*1000),ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) );
 	  }
     }
-    //ctx.fillText( "Imposta Netta",ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) -30);
     
     var indiceRegione=document.getElementById("regione").selectedIndex;
     var regione=document.getElementById("regione").options[indiceRegione].text;
@@ -633,8 +585,6 @@ function gra_anno() {
     ctx.font = "bold 8pt Arial";
     ctx.fillText( 'Stipendio netto annuo in ' + regione + ', coniuge a carico: ' + carico + ', figli < 3 anni: ' + figliInferiore + ', figli > 3 anni: ' + figliSuperiore + ', figli disabili < 3 anni: ' + figliHandicapInferiore + ', figli disabili > 3 anni: ' + figliHandicapSuperiore +', percentuale figli a carico: ' + percentuale + '%, altri familiari in carico: ' + familiari +', giorni di lavoro: ' + giorni,ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) -30 );
     
-    
-    
     var mx=ORIGIN_X,my=ORIGIN_Y;
     var part_x=(WIDTH_PX) / 18;
     for(p=0;p<=18;p++) {
@@ -644,14 +594,8 @@ function gra_anno() {
 	  calcolostipendionetto();
 	  var coin_num=parseInt(document.getElementById("stipendioAnuale").value) * WIDTH_PY / 55000;
 	  abs_putpixel((p*part_x)-1,coin_num*-1,2)
-	  //ctx.moveTo(mx,my);
 	  ctx.moveTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
-	  //ctx.lineTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
 	  ctx.lineTo(ORIGIN_X + 1, ORIGIN_Y + coin_num*-1);
-	  
-	  //ctx.moveTo(mx,my);
-	  //ctx.lineTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
-	  //ctx.lineTo(ORIGIN_X , ORIGIN_Y + coin_num*-1);
 	  mx=ORIGIN_X + ( (p*part_x))-1;
 	  my=ORIGIN_Y + coin_num*-1;
 	  ctx.moveTo(mx,my);
@@ -685,13 +629,10 @@ function gra_anno() {
 	  }
 	  console.log('XXX:'+coin_num);
 	  ctx.lineTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
-	  //ctx.lineTo(ORIGIN_X , ORIGIN_Y + coin_num*-1);
-	  //ctx.moveTo(ORIGIN_X , ORIGIN_Y + coin_num*-1);
 	  mx=ORIGIN_X + ( (p*part_x))-1;
 	  my=ORIGIN_Y + coin_num*-1;
     }
     ctx.stroke();
-    
     
     document.getElementById('gdiv').appendChild(c);
     document.getElementById("redditoComplessivo").value='';
@@ -721,18 +662,15 @@ function gra_imposta() {
     ctx.beginPath();
     ctx.strokeStyle = '#232323';   
     ctx.lineWidth=2;
-    
     abs_lineto(WIDTH_PX,0);          // positives x
     abs_lineto(NEGATIVE_AXES_LEN * -1,0);          // negatives x
     abs_lineto(0,WIDTH_PY*-1);           // Create a starting point
     abs_lineto(0,NEGATIVE_AXES_LEN);          // negatives y
-    
     ctx.stroke();
     
     ctx.beginPath();
     ctx.strokeStyle = '#CDC5C2';   
 
-    
     var part_y=WIDTH_PY / 30;
     for(p=0;p<=30;p++) {
 	  if(!(p%2)) {
@@ -742,7 +680,6 @@ function gra_imposta() {
 	      ctx.fillText( numberWithCommas(p*1000),ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) );
 	  }
     }
-    //ctx.fillText( "Imposta Netta",ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) -30);
     
     var indiceRegione=document.getElementById("regione").selectedIndex;
     var regione=document.getElementById("regione").options[indiceRegione].text;
@@ -767,7 +704,6 @@ function gra_imposta() {
     ctx.font = "bold 8pt Arial";
     ctx.fillText( "Imposta Netta, " + document.getElementById("mensilita").value + ' mensilita\' in ' + regione + ', coniuge a carico: ' + carico + ', figli < 3 anni: ' + figliInferiore + ', figli > 3 anni: ' + figliSuperiore + ', figli disabili < 3 anni: ' + figliHandicapInferiore + ', figli disabili > 3 anni: ' + figliHandicapSuperiore +', percentuale figli a carico: ' + percentuale + '%, altri familiari in carico: ' + familiari +', giorni di lavoro: ' + giorni,ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) -30 );
     
-    
     var mx=ORIGIN_X,my=ORIGIN_Y;
     var part_x=(WIDTH_PX) / 18;
     for(p=0;p<=18;p++) {
@@ -778,15 +714,8 @@ function gra_imposta() {
 	  var coin_num=parseInt(document.getElementById("impostaNetta").value) * WIDTH_PY / 30000;
 	  console.log('UHU:'+coin_num);
 	  abs_putpixel((p*part_x)-1,coin_num*-1,2)
-	  
-	  //ctx.moveTo(mx,my);
 	  ctx.moveTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
-	  //ctx.lineTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
 	  ctx.lineTo(ORIGIN_X + 1, ORIGIN_Y + coin_num*-1);
-	  
-	  //ctx.moveTo(mx,my);
-	  //ctx.lineTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
-	  //ctx.lineTo(ORIGIN_X , ORIGIN_Y + coin_num*-1);
 	  mx=ORIGIN_X + ( (p*part_x))-1;
 	  my=ORIGIN_Y + coin_num*-1;
 	  ctx.moveTo(mx,my);
@@ -819,13 +748,10 @@ function gra_imposta() {
 	  }
 	  console.log('XXX:'+coin_num);
 	  ctx.lineTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
-	  //ctx.lineTo(ORIGIN_X , ORIGIN_Y + coin_num*-1);
-	  //ctx.moveTo(ORIGIN_X , ORIGIN_Y + coin_num*-1);
 	  mx=ORIGIN_X + ( (p*part_x))-1;
 	  my=ORIGIN_Y + coin_num*-1;
     }
     ctx.stroke();
-    
     
     document.getElementById('gdiv').appendChild(c);
     document.getElementById("redditoComplessivo").value='';
@@ -839,34 +765,26 @@ function gra() {
     document.getElementById("stipendioMensile").value='';
     ctx.clearRect(0, 0, c.width, c.height);
     ctx.beginPath();
-    
     ctx.fillStyle = colors_background;
     ctx.fillRect(0, 0, c.width, c.height); 
     ctx.strokeStyle = colors_line;
     ctx.fillStyle = colors_text;
-    
-    
     ORIGIN_X=PAD_MARGIN + NEGATIVE_AXES_LEN;
     ORIGIN_Y=CANVAS_HEIGHT - PAD_MARGIN - NEGATIVE_AXES_LEN + 80;
     ctx.moveTo(ORIGIN_X,ORIGIN_Y);           // Create a starting point
     var CUR_X=ORIGIN_X;
     var CUR_Y=ORIGIN_Y;
-    
     ctx.beginPath();
     ctx.strokeStyle = '#232323';   
     ctx.lineWidth=2;
-    
     abs_lineto(WIDTH_PX,0);          // positives x
     abs_lineto(NEGATIVE_AXES_LEN * -1,0);          // negatives x
     abs_lineto(0,WIDTH_PY*-1);           // Create a starting point
     abs_lineto(0,NEGATIVE_AXES_LEN);          // negatives y
-    
     ctx.stroke();
     
     ctx.beginPath();
     ctx.strokeStyle = '#CDC5C2';   
-    
-    
     var part_y=WIDTH_PY / 8;
     for(p=0;p<=8;p++) {
 	  abs_putpixel(-3,(p*part_y)*-1-1,2)
@@ -874,7 +792,6 @@ function gra() {
 	  ctx.font = "normal 8pt Arial";
 	  ctx.fillText( numberWithCommas(p*500),ORIGIN_X-50,ORIGIN_Y - ( (p*part_y)) );
     }
-    
     var indiceRegione=document.getElementById("regione").selectedIndex;
     var regione=document.getElementById("regione").options[indiceRegione].text;
     
@@ -905,13 +822,9 @@ function gra() {
 	  document.getElementById("redditoComplessivo").value=p*5000;
 	  calcolostipendionetto();
 	  var coin_num=parseInt(document.getElementById("stipendioMensile").value) * WIDTH_PY / 4000;
-	  console.log('UHU:'+coin_num);
 	  abs_putpixel((p*part_x)-1,coin_num*-1,2)
-	  //ctx.moveTo(mx,my);
 	  ctx.moveTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
-	  //ctx.lineTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
 	  ctx.lineTo(ORIGIN_X+1 , ORIGIN_Y + coin_num*-1);
-	  
 	  mx=ORIGIN_X + ( (p*part_x))-1;
 	  my=ORIGIN_Y + coin_num*-1;
 	  ctx.moveTo(mx,my);
@@ -926,7 +839,6 @@ function gra() {
     ctx.fillText( "© Giacomo Picconi, " + (new Date()).getFullYear(), ORIGIN_X + (18*part_x) -20 , ORIGIN_Y + 50 );
     ctx.stroke();
 
-    
     document.getElementById("stipendioMensile").value='';
     
     ctx.beginPath();
@@ -939,24 +851,15 @@ function gra() {
 	  document.getElementById("redditoComplessivo").value=p*5000;
 	  calcolostipendionetto();
 	  var coin_num=parseInt(document.getElementById("stipendioMensile").value) * WIDTH_PY / 4000;
-	  
-	  
-	  
 	  if(isNaN(coin_num)) {
 	    coin_num=0;
 	  }
 	  console.log('XXX:'+coin_num);
 	  ctx.lineTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
-	  //ctx.lineTo(ORIGIN_X , ORIGIN_Y + coin_num*-1);
-	  //ctx.moveTo(ORIGIN_X , ORIGIN_Y + coin_num*-1);
 	  mx=ORIGIN_X + ( (p*part_x))-1;
 	  my=ORIGIN_Y + coin_num*-1;
     }
-    
-    ctx.stroke();                // Draw it
-    
-    
-    
+    ctx.stroke();
     
     document.getElementById('gdiv').appendChild(c);
     document.getElementById("redditoComplessivo").value='';
@@ -975,6 +878,5 @@ window.onload=gra;
 [4] Normalmente si devono lasciare 365 giorni a meno che non si abbia un contratto di lavoro a tempo determinato, per il quale quindi non si raggiungeranno i 365 giorni (1 anno) di lavoro.
 [5] Lo stipendio netto calcolato non tiene conto del bonus Irpef e si riferisce al numero di mensilità indicato (vedi nota [3]) 
 </pre>
-
 </body>
 </html>
