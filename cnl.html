@@ -708,7 +708,7 @@ function gra_imposta() {
     var giorni=document.getElementById("giorni").value;
     
     ctx.font = "bold 8pt Arial";
-    ctx.fillText( "Imposta Netta, " + document.getElementById("mensilita").value + ' mensilita\' in ' + regione + ', coniuge a carico: ' + carico + ', figli < 3 anni: ' + figliInferiore + ', figli > 3 anni: ' + figliSuperiore + ', figli disabili < 3 anni: ' + figliHandicapInferiore + ', figli disabili > 3 anni: ' + figliHandicapSuperiore +', percentuale figli a carico: ' + percentuale + '%, altri familiari in carico: ' + familiari +', giorni di lavoro: ' + giorni,ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) -30 );
+    ctx.fillText( 'Imposta Netta in ' + regione + ', coniuge a carico: ' + carico + ', figli < 3 anni: ' + figliInferiore + ', figli > 3 anni: ' + figliSuperiore + ', figli disabili < 3 anni: ' + figliHandicapInferiore + ', figli disabili > 3 anni: ' + figliHandicapSuperiore +', percentuale figli a carico: ' + percentuale + '%, altri familiari in carico: ' + familiari +', giorni di lavoro: ' + giorni,ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) -30 );
     
     var mx=ORIGIN_X,my=ORIGIN_Y;
     var part_x=(WIDTH_PX) / 18;
