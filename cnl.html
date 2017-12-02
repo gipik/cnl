@@ -610,6 +610,12 @@ function gra_anno() {
     ctx.fillText( "© Giacomo Picconi, " + (new Date()).getFullYear(), ORIGIN_X + (18*part_x) -20 , ORIGIN_Y + 50 );
     ctx.stroke();
     
+    
+    ctx.beginPath();
+    ctx.fillStyle = '#EE204D';   
+    ctx.fillText( "Need support ? Please contact giacomo.picconi@gmail.com", ORIGIN_X - PAD_MARGIN , ORIGIN_Y + 50 );
+    ctx.stroke();
+    
     document.getElementById("stipendioAnuale").value='';
     
     ctx.beginPath();
