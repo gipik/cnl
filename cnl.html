@@ -334,9 +334,9 @@ function calcolostipendionetto() {
 												IRPEFnetta=0;
 											}
 											document.getElementById("impostaNetta").value=Math.round(IRPEFnetta*100)/100;
-											var stipendioAnuale=redditoImponibile-IRPEFnetta;
-											document.getElementById("stipendioAnuale").value=Math.round(stipendioAnuale*100)/100;
-											var stipendioMensuale=stipendioAnuale/mensilita;
+											var stipendioAnnuale=redditoImponibile-IRPEFnetta;
+											document.getElementById("stipendioAnnuale").value=Math.round(stipendioAnnuale*100)/100;
+											var stipendioMensuale=stipendioAnnuale/mensilita;
 											document.getElementById("stipendioMensile").value=Math.round(stipendioMensuale*100)/100;
 											document.getElementById("mensilita").innerHTML=" "+mensilita+" mensilità";
 											
@@ -356,7 +356,7 @@ function calcolostipendionetto() {
 </script>
 
 <font face=arial>
-<center><b>Grafico stipendio netto in funzione del reddito annuo lordo (R.A.L.)</b></center><br>
+<center><b>Grafico stipendio netto in funzione del reddito annuale lordo (R.A.L.)</b></center><br>
 <center>
 <table width=100%>
 <tr align=center>
@@ -450,7 +450,7 @@ function calcolostipendionetto() {
       <hr />
       <br />
       <div class="form_labelbox">
-	<label class="lfc" for="redditoComplessivo">Stipendio annuo lordo (RAL)<sup><a href="#notes">[1]</a></sup></label>
+	<label class="lfc" for="redditoComplessivo">Stipendio annuale lordo (RAL)<sup><a href="#notes">[1]</a></sup></label>
 	&nbsp;
 	<input alt="" id="redditoComplessivo" maxlength="9" name="redditoComplessivo" size="9" style="text-align: right; width: 140px;" tabindex="1" type="text" value="" />&nbsp; <label class="lfc" for="redditoComplessivo">Euro</label>
       </div>
@@ -469,8 +469,8 @@ function calcolostipendionetto() {
     <div id="resultadoPrimero">
       <br />
       <div class="form_labelbox">
-	<label class="labelformresultado">Stipendio netto annuo:</label>
-	<input alt="" class="textInput" id="stipendioAnuale" maxlength="9" name="stipendioAnuale" size="9" style="width: 100px;" tabindex="13" type="text" value="" />&nbsp; 
+	<label class="labelformresultado">Stipendio netto annuale:</label>
+	<input alt="" class="textInput" id="stipendioAnnuale" maxlength="9" name="stipendioAnnuale" size="9" style="width: 100px;" tabindex="13" type="text" value="" />&nbsp; 
       </div>
       <br />
     </div>
@@ -583,7 +583,7 @@ function gra_anno() {
     
     var giorni=document.getElementById("giorni").value;
     ctx.font = "bold 8pt Arial";
-    ctx.fillText( 'Stipendio netto annuo in ' + regione + ', coniuge a carico: ' + carico + ', figli < 3 anni: ' + figliInferiore + ', figli > 3 anni: ' + figliSuperiore + ', figli disabili < 3 anni: ' + figliHandicapInferiore + ', figli disabili > 3 anni: ' + figliHandicapSuperiore +', percentuale figli a carico: ' + percentuale + '%, altri familiari in carico: ' + familiari +', giorni di lavoro: ' + giorni,ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) -30 );
+    ctx.fillText( 'Stipendio netto annuale in ' + regione + ', coniuge a carico: ' + carico + ', figli < 3 anni: ' + figliInferiore + ', figli > 3 anni: ' + figliSuperiore + ', figli disabili < 3 anni: ' + figliHandicapInferiore + ', figli disabili > 3 anni: ' + figliHandicapSuperiore +', percentuale figli a carico: ' + percentuale + '%, altri familiari in carico: ' + familiari +', giorni di lavoro: ' + giorni,ORIGIN_X-60,ORIGIN_Y - ( (p*part_y)) -30 );
     
     var mx=ORIGIN_X,my=ORIGIN_Y;
     var part_x=(WIDTH_PX) / 18;
@@ -592,7 +592,7 @@ function gra_anno() {
 	  abs_putpixel((p*part_x)-1,0,2)
 	  document.getElementById("redditoComplessivo").value=p*5000;
 	  calcolostipendionetto();
-	  var coin_num=parseInt(document.getElementById("stipendioAnuale").value) * WIDTH_PY / 55000;
+	  var coin_num=parseInt(document.getElementById("stipendioAnnuale").value) * WIDTH_PY / 55000;
 	  abs_putpixel((p*part_x)-1,coin_num*-1,2)
 	  ctx.moveTo(ORIGIN_X + ( (p*part_x))-1, ORIGIN_Y + coin_num*-1);
 	  ctx.lineTo(ORIGIN_X + 1, ORIGIN_Y + coin_num*-1);
@@ -601,7 +601,7 @@ function gra_anno() {
 	  ctx.moveTo(mx,my);
 	  ctx.lineTo(ORIGIN_X + ( ((p)*part_x)), ORIGIN_Y);
 	  ctx.font = "bold 8pt Arial";
-	  ctx.fillText( numberWithCommas(parseInt(document.getElementById("stipendioAnuale").value)), mx+5,my + 10 );
+	  ctx.fillText( numberWithCommas(parseInt(document.getElementById("stipendioAnnuale").value)), mx+5,my + 10 );
 	  ctx.font = "normal 8pt Arial";
 	  ctx.fillText( numberWithCommas(p*5000), ORIGIN_X + ( (p*part_x))  , ORIGIN_Y + 15 );
     }
@@ -616,7 +616,7 @@ function gra_anno() {
     ctx.fillText( "Need support ? Please contact giacomo.picconi@gmail.com", ORIGIN_X - PAD_MARGIN , ORIGIN_Y + 50 );
     ctx.stroke();
     
-    document.getElementById("stipendioAnuale").value='';
+    document.getElementById("stipendioAnnuale").value='';
     
     ctx.beginPath();
     ctx.strokeStyle = '#EE204D';
@@ -628,7 +628,7 @@ function gra_anno() {
     for(p=0;p<=18;p++) {
 	  document.getElementById("redditoComplessivo").value=p*5000;
 	  calcolostipendionetto();
-	  var coin_num=parseInt(document.getElementById("stipendioAnuale").value) * WIDTH_PY / 55000;
+	  var coin_num=parseInt(document.getElementById("stipendioAnnuale").value) * WIDTH_PY / 55000;
 	  
 	  if(isNaN(coin_num)) {
 	    coin_num=0;
@@ -643,7 +643,7 @@ function gra_anno() {
     document.getElementById('gdiv').appendChild(c);
     document.getElementById("redditoComplessivo").value='';
     document.getElementById("stipendioMensile").value='';
-    document.getElementById("stipendioAnuale").value='';
+    document.getElementById("stipendioAnnuale").value='';
     document.getElementById("impostaNetta").value='';
 }
 
@@ -762,7 +762,7 @@ function gra_imposta() {
     document.getElementById('gdiv').appendChild(c);
     document.getElementById("redditoComplessivo").value='';
     document.getElementById("stipendioMensile").value='';
-    document.getElementById("stipendioAnuale").value='';
+    document.getElementById("stipendioAnnuale").value='';
     document.getElementById("impostaNetta").value='';
 }
 
@@ -870,7 +870,7 @@ function gra() {
     document.getElementById('gdiv').appendChild(c);
     document.getElementById("redditoComplessivo").value='';
     document.getElementById("stipendioMensile").value='';
-    document.getElementById("stipendioAnuale").value='';
+    document.getElementById("stipendioAnnuale").value='';
     document.getElementById("impostaNetta").value='';
 }
 
