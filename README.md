@@ -1,2 +1,2 @@
-# cnl
-Stipendio netto in funzione del reddito annuo lordo (R.A.L.)
+# FBL
+Calcolo e grafico dello stipendio netto annuale e mensile e dell'imposta netta in funzione del Reddito Annuale Lordo (R.A.L.).
